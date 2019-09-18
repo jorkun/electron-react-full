@@ -1,0 +1,52 @@
+/**
+ * @Author: Zhao Kunkun
+ * @Date: 2019-07-23 11:59:31
+ * @Last Modified by: zhangliming
+ * @Last Modified time: 2019-08-28 18:57:06
+ */
+body[class*="theme"] {
+    .ant-modal-close{
+        color:rgba(0, 0, 0, 1)
+    }
+    img.jupiter-modal-img{
+        width:23px;
+        height:21px;
+        float: right;
+        margin: 5px 10px;
+        cursor: pointer
+    }
+.script-modal.jupiter-modal.ant-modal {
+    .ant-modal-body .platform-modal-content {
+        padding-top: 0;
+    }
+    .script-editor-header {
+        border: 1px solid #60c2de;
+        border-bottom: none;
+        border-top: none;
+        padding: 0 12px;
+        background: #ecefee;
+        margin-right: 1px;
+        &>label {
+            font-weight: bold;
+        }
+        .save-btn {
+            padding: 1px;
+            line-height: 13px;
+            height: 22px;
+            font-size: 16px;
+            border-radius: 4px;
+            vertical-align: middle;
+        }
+    }
+    .divider-vertical {
+        padding: 0 10px;
+    }
+    .script-editor-body.jupiter-code-editor {
+        border: 1px solid #60c2de;
+        height: calc(100% - 50px);
+        .jupiter-func {
+            border-right: 1px solid #60c2de;
+        }
+    }
+}
+}

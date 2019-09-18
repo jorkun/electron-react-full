@@ -1,0 +1,21 @@
+/**
+ * @Author: Zhao Kunkun
+ * @Date: 2019-06-04 14:47:30
+ * @Last Modified by: Zhao Kunkun
+ * @Last Modified time: 2019-06-04 16:04:24
+ */
+.ant-table-tfoot {
+    color     : #333;
+    border: solid 1px #e8e8e8;
+}
+
+.ant-table-tfoot td {
+    padding   : 8px;
+    &.text-center {
+        text-align: center;
+        font-weight: bold;
+    }
+    &.text-right {
+        text-align: right;
+     }
+}
