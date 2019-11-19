@@ -7,7 +7,7 @@ import webpack from 'webpack'
 import WebpackDevServer from 'webpack-dev-server'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 
-import { port, source } from '../config/dev.config'
+import { port, source, proxy } from '../config/dev.config'
 
 process.env.NODE_ENV = 'development'
 const webpackConfig = require('../config/webpack.config')
@@ -19,7 +19,7 @@ let hotMiddleware
 function startRenderer() {
   return new Promise((resolve, reject) => {
 
-    webpackConfig.devtool = 'source-map'
+    webpackConfig.devtool = 'eval-source-map'
     const hotclient = ['webpack-hot-middleware/client?noInfo=true&reload=true']
 
     if (typeof webpackConfig.entry == 'object') {
@@ -47,16 +47,18 @@ function startRenderer() {
       {
         contentBase: source,
         historyApiFallback: {
-          index: 'index.html',
+          index: 'index.html'
         },
-        quiet: true, // 隐藏日志
+        proxy: proxy, // 开发环境代理
+        noInfo: true,
+        quiet: false, // 显示开发日志
         before(app, ctx) {
           app.use(hotMiddleware)
-          ctx.middleware.waitUntilValid((err) => {
+          ctx.middleware.waitUntilValid(() => {
             console.log(`dev-server at ${chalk.magenta.underline(`http://localhost:${port}`)}`)
             resolve()
           })
-        },
+        }
       }
     )
     server.listen(port)

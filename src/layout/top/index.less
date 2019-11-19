@@ -1,0 +1,43 @@
+/**
+ * @Author: Zhao Kunkun
+ * @Date: 2019-09-29 17:48:11
+ * @Last Modified by: Zhao Kunkun
+ * @Last Modified time: 2019-11-18 17:38:22
+ */
+ @import '../../pub/styles/_variable.less';
+.cbpc-top {
+    display: flex;
+    width: 100%;
+    background: @header-bgcolor;
+    height: 30px;
+    line-height: 30px;
+    color: #FFFFFF;
+    justify-content: space-between;
+    border-bottom: 1px solid #363843;
+    -webkit-app-region: drag;
+    z-index: 9999;
+    .title {
+        padding-left: 20px;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+    .action {
+        font-size: 14px;
+        overflow: hidden;
+        height: 30px;
+        -webkit-app-region: no-drag;
+        &>* {
+            line-height: 30px;
+            width: 50px;
+            cursor: pointer;
+            vertical-align: top;
+            padding-top   : 2px;
+            &:hover {
+                background: #6a6a6b;
+                &.close {
+                    background: red;
+                }
+            }
+        }
+    }
+}

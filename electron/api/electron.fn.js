@@ -8,7 +8,6 @@ function nodeFunction() {
 const $api = {
   app,
   createWindow, getWindowUrl,
-
   nodeFunction,
 }
 

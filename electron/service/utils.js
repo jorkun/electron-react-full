@@ -1,5 +1,24 @@
 const { ipcMain } = require('electron')
 
+const sleep = (ms) => {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+const successResponse = (event, data) => {
+    event.returnValue = {
+        code: '20000',
+        data: data
+    }
+}
+
+const successAsyncResponse = (event, endpoint, data) => {
+    let value = {
+        code: '20000',
+        data: data
+    }
+    event.sender.send(endpoint, value)
+}
+
 
 const syncReplyService = (endpoint, func, ...args) => {
     return ipcMain.on(endpoint, (event, arg) => {
@@ -18,25 +37,6 @@ const asyncOnceReplyService = (endpoint, func, ...args) => {
         let data = await func(arg, ...args)
         successAsyncResponse(event, endpoint + '-reply', data)
     })
-}
-
-const sleep = (ms) => {
-  return new Promise(resolve => setTimeout(resolve, ms))
-}
-
-const successResponse = (event, data) => {
-    event.returnValue = {
-        code: '20000',
-        data: data
-    }
-}
-
-const successAsyncResponse = (event, endpoint, data) => {
-    let value = {
-        code: '20000',
-        data: data
-    }
-    event.sender.send(endpoint, value)
 }
 
 module.exports = {

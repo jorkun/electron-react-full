@@ -5,16 +5,16 @@ const { appName, trayIconDark, trayIconLight } = require('../../config/app.confi
 const { createWindow } = require('../window')
 const defaultMenus = require('../menus/tray-menus')
 
-
+// 托盘设置
 function creatTray({ menus = defaultMenus, title = appName, icon } = {}) {
   const iconPath = process.platform === 'darwin' ? systemPreferences.isDarkMode() ? trayIconLight : trayIconDark : trayIconLight
   let image = nativeImage.createFromPath(iconPath)
   image.setTemplateImage(true)
   let tray = new Tray(image)
   tray.setToolTip(title)
-  tray.setContextMenu(Menu.buildFromTemplate(menus))
+  // tray.setContextMenu(Menu.buildFromTemplate(menus))
   tray.on('double-click', () => {
-    createWindow('home')
+    createWindow('', {}, true)
   })
 
   return tray

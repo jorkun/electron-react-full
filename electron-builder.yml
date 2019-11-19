@@ -1,0 +1,49 @@
+{
+  'appId': 'com.electron.cbpc',
+  'productName': 'WEB-ELECTRON',
+  'artifactName': 'ELECTRON-${version}-${channel}-${arch}.${ext}',
+  'copyright': 'Copyright ©2019-2020 ELECTRON',
+  'asar': true,
+  'directories': { 'buildResources': 'assets/app-icon/icon', 'output': 'release' },
+  'files': ['dist/**/*', 'electron/**/*', 'assets/**/*', 'config/**/*'],
+  # 'publish': { 'provider': 'generic', 'url': 'http://127.0.0.1:99/' },
+  'mac':
+    {
+      'target': 'dmg',
+      'icon': './assets/app-icon/icon/icon.icns',
+      'category': 'public.app-category.instant-messaging',
+    },
+  'win':
+    {
+      'icon': './assets/app-icon/icon/icon.ico',
+      'target': [{ 'target': 'nsis', 'arch': ['x64', 'ia32'] }],
+      'verifyUpdateCodeSignature': false,
+      'signingHashAlgorithms': ['sha256', 'sha1'],
+      'signDlls': true,
+      # 'rfc3161TimeStampServer': 'http://timestamp.digicert.com',
+      'certificateFile': './user-rsa.pfx',
+      'certificatePassword': '123456',
+    },
+  'linux':
+    {
+      'target':
+        [
+          { 'target': 'AppImage', 'arch': ['x64', 'ia32'] },
+          { 'target': 'deb', 'arch': ['x64', 'ia32'] },
+          { 'target': 'rpm', 'arch': ['x64', 'ia32'] },
+        ],
+      'executableName': 'ELECTRON',
+      'icon': './assets/',
+      'category': 'InstantMessaging;Network',
+    },
+  'nsis':
+    {
+      'oneClick': false,
+      'perMachine': true,
+      'allowToChangeInstallationDirectory': true,
+      'displayLanguageSelector': true,
+      'language': 2052,
+      'createDesktopShortcut': true,
+      'createStartMenuShortcut': true
+    },
+}

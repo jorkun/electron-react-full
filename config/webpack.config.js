@@ -47,13 +47,28 @@ const webpackConfig = {
   },
 
   devtool: 'source-map',
-
+  externals: {
+    'shortcut-capture': 'require("shortcut-capture")'
+  },
   module: {
     rules: [
       {
         test: /\.js[x]?$/,
+        enforce: 'pre',
+        exclude: /node_modules/,
         include: appPath,
-        loader: ['babel-loader'],
+        use: [{
+          loader: require.resolve('eslint-loader'),
+          options: {
+            formatter: require('eslint-friendly-formatter'),
+            eslintPath: require.resolve('eslint')
+          }
+        }]
+      },
+      {
+        test: /\.js[x]?$/,
+        include: appPath,
+        loader: ['babel-loader']
       },
       {
         test: /\.(less)$/,
@@ -65,22 +80,25 @@ const webpackConfig = {
               javascriptEnabled: true,
               modifyVars: {
                 // 更改主题色
-                'primary-color': '#74839b',
-              },
+                'primary-color': '#FF7700',
+                'border-radius-base': '2px',
+                'text-color': '#0C0101',
+                'border-color-base': '#dedede'
+              }
             }
           }
         ]
       },
       {
         test: /\.css$/,
-        use: styleLoader,
+        use: styleLoader
       },
       {
         test: /\.(png|jpe?g|gif|svg|swf|woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'file-loader',
         query: {
           // limit: 10000,
-          name: 'assets/[name].[ext]',
+          name: 'assets/[name].[ext]'
         }
       }
     ]
@@ -89,7 +107,7 @@ const webpackConfig = {
   optimization: {
     minimizer: [new TerserPlugin()],
     splitChunks: {
-      name: "common",
+      name: 'common'
     }
   },
 
